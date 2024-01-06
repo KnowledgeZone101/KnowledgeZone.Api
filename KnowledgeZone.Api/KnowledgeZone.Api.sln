@@ -5,9 +5,9 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnowledgeZone.Api", "KnowledgeZone.Api\KnowledgeZone.Api.csproj", "{585C1DA1-30FA-4D03-A194-524917199ABF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnowledgeZone.Domain", "KnowledgeZone.Domain\KnowledgeZone.Domain.csproj", "{8B17D510-78D7-4117-9A52-AB26BFCA4A23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnowledgeZone.Domain", "KnowledgeZone.Domain\KnowledgeZone.Domain.csproj", "{48040221-3418-4492-BC4F-C3B88D5DF742}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeZone.Infrastructure", "KnowledgeZone.Infrastructure\KnowledgeZone.Infrastructure.csproj", "{8015BB89-C0B0-43EE-9B4A-12E65E54A798}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnowledgeZone.Infrastructure", "KnowledgeZone.Infrastructure\KnowledgeZone.Infrastructure.csproj", "{8015BB89-C0B0-43EE-9B4A-12E65E54A798}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,10 @@ Global
 		{585C1DA1-30FA-4D03-A194-524917199ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{585C1DA1-30FA-4D03-A194-524917199ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{585C1DA1-30FA-4D03-A194-524917199ABF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8B17D510-78D7-4117-9A52-AB26BFCA4A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B17D510-78D7-4117-9A52-AB26BFCA4A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B17D510-78D7-4117-9A52-AB26BFCA4A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B17D510-78D7-4117-9A52-AB26BFCA4A23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48040221-3418-4492-BC4F-C3B88D5DF742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48040221-3418-4492-BC4F-C3B88D5DF742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48040221-3418-4492-BC4F-C3B88D5DF742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48040221-3418-4492-BC4F-C3B88D5DF742}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8015BB89-C0B0-43EE-9B4A-12E65E54A798}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8015BB89-C0B0-43EE-9B4A-12E65E54A798}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8015BB89-C0B0-43EE-9B4A-12E65E54A798}.Release|Any CPU.ActiveCfg = Release|Any CPU
