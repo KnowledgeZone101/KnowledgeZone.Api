@@ -13,5 +13,6 @@ namespace KnowledgeZone.Domain.Entities
         public Enrollment Enrollment { get; set; }
         public int CourseTypeId { get; set; }
         public CourseType CourseType { get; set; }
+        public virtual ICollection<Lesson> Lessons { get; set; }
     }
 }
