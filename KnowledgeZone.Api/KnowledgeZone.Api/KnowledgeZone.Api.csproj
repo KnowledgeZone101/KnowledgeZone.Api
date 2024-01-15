@@ -19,4 +19,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KnowledgeZone.Infrastructure\KnowledgeZone.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
