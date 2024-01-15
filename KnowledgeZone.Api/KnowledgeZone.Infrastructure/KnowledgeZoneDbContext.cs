@@ -23,7 +23,7 @@ namespace KnowledgeZone.Infrastructure
 
         public KnowledgeZoneDbContext(DbContextOptions<KnowledgeZoneDbContext> options) : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

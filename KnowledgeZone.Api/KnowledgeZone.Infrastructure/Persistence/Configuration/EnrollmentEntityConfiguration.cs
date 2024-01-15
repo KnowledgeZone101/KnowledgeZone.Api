@@ -15,9 +15,8 @@ namespace KnowledgeZone.Infrastructure.Persistence.Configuration
                 .HasMaxLength(255)
                 .IsRequired();
 
-            builder.HasMany(s => s.Students)
-                .WithOne(e => e.Enrollment)
-                .HasForeignKey(e => e.EnrollmentId);
+            //builder.HasMany(s => s.Students)
+            //    .WithOne(e => e.Enrollment);
 
             builder.HasMany(c => c.Courses)
                 .WithOne(e => e.Enrollment)
