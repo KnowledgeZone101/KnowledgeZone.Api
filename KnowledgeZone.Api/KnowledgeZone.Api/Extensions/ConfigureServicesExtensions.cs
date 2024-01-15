@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KnowledgeZone.Api.Extensions
 {
-    public class ConfigureServicesExtensions
+    public static class ConfigureServicesExtensions
     {
         public static IServiceCollection ConfigureDatabaseContext(this IServiceCollection services)
         {
