@@ -6,10 +6,10 @@ namespace KnowledgeZone.Domain.Interfaces.IServices
 {
     public interface IStudentService
     {
-        PaginatedList<StudentDto> GetStudent(StudentResourceParamentrs qualificationParameters);
+        PaginatedList<StudentDto> GetStudent(StudentResourceParamentrs studentParameters);
         StudentDto? GetStudentById(int id);
-        StudentDto CreateStudent(StudentForCreateDto qualificationToCreate);
-        void UpdateStudent(StudentForUpdateDto qualificationToUpdate);
+        StudentDto CreateStudent(StudentForCreateDto studentToCreate);
+        void UpdateStudent(StudentForUpdateDto studentToUpdate);
         void DeleteStudent(int id);
     }
 }
