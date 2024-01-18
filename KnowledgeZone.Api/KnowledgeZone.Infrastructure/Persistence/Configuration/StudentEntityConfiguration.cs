@@ -22,7 +22,6 @@ namespace KnowledgeZone.Infrastructure.Persistence.Configuration
             builder.HasOne(s => s.Enrollment)
                 .WithMany(e => e.Students)
                 .HasForeignKey(s => s.EnrollmentId);
-
         }
     }
 }
