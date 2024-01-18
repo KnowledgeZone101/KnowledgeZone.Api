@@ -1,9 +1,4 @@
 ﻿using KnowledgeZone.Domain.Interfaces.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KnowledgeZone.Infrastructure.Persistence.Repositories
 {
@@ -18,6 +13,7 @@ namespace KnowledgeZone.Infrastructure.Persistence.Repositories
             get
             {
                 _attendance ??= new AttendanceRepository(_context);
+
                 return _attendance;
             }
         }
@@ -130,5 +126,26 @@ namespace KnowledgeZone.Infrastructure.Persistence.Repositories
             }
         }
         #endregion  
+
+        public CommonRepository(KnowledgeZoneDbContext context)
+        {
+            _context = context;
+
+            _attendance = new AttendanceRepository(context);
+            _course = new CourseRepository(context);
+            _courseType = new CourseTypeRepository(context);
+            _department = new DepartmentRepository(context);
+            _enrollment = new EnrollmentRepository(context);
+            _lesson = new LessonRepository(context);
+            _student = new StudentRepository(context);
+            _teacher = new TeacherRepository(context);
+            _qualification = new QualificationRepository(context);
+            _room = new RoomRepository(context);
+        }
+
+        public int SaveChanges()
+        {
+            return _context.SaveChanges();
+        }
     }
 }
