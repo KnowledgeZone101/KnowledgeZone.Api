@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace KnowledgeZone.Domain.Interfaces.Repository
 {
-    public class ICommonRepository
+    public interface ICommonRepository
     {
-        public IAttendanceRepository Attendence { get;}
+        public IAttendanceRepository Attendance { get;}
         public ICourseRepository Course { get;}
         public ICourseTypeRepository CourseType { get; }
         public IDepartmentRepository Department { get; }    
