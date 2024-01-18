@@ -127,6 +127,7 @@ namespace KnowledgeZone.Infrastructure.Persistence.Repositories
         }
         #endregion  
 
+
         public CommonRepository(KnowledgeZoneDbContext context)
         {
             _context = context;
