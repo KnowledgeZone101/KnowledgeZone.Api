@@ -1,7 +1,11 @@
-﻿using KnowledgeZone.Domain.DTOs.Qualification;
+﻿using KnowledgeZone.Domain.DTOs.Attendance;
+using KnowledgeZone.Domain.DTOs.Qualification;
+using KnowledgeZone.Domain.Entities;
 using KnowledgeZone.Domain.Interfaces.IServices;
+using KnowledgeZone.Domain.Pagination;
 using KnowledgeZone.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace KnowledgeZone.Api.Controllers
 {
@@ -19,6 +23,10 @@ namespace KnowledgeZone.Api.Controllers
         public ActionResult<IEnumerable<QualificationDto>> GetQualification([FromQuery] QualificationResourceParamentrs qualificationResourceParamentrs)
         {
             var qualification = _qualificationService.GetQualification(qualificationResourceParamentrs);
+
+            var metaData = GetPagenationMetaData(qualification);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
 
             return Ok(qualification);
         }
@@ -53,6 +61,23 @@ namespace KnowledgeZone.Api.Controllers
             _qualificationService.DeleteQualification(id);
 
             return NoContent();
+        }
+        private PagenationMetaData GetPagenationMetaData(PaginatedList<QualificationDto> qualificationDtOs)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = qualificationDtOs.TotalCount,
+                PageSize = qualificationDtOs.PageSize,
+                CurrentPage =  qualificationDtOs.CurrentPage,
+                TotalPages = qualificationDtOs.TotalPage,
+            };
+        }
+        class PagenationMetaData
+        {
+            public int Totalcount { get; set; }
+            public int PageSize { get; set; }
+            public int CurrentPage { get; set; }
+            public int TotalPages { get; set; }
         }
     }
 }

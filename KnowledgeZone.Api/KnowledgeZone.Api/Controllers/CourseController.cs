@@ -1,7 +1,11 @@
-﻿using KnowledgeZone.Domain.DTOs.Course;
+﻿using KnowledgeZone.Domain.DTOs.Attendance;
+using KnowledgeZone.Domain.DTOs.Course;
+using KnowledgeZone.Domain.Entities;
 using KnowledgeZone.Domain.Interfaces.IServices;
+using KnowledgeZone.Domain.Pagination;
 using KnowledgeZone.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace KnowledgeZone.Api.Controllers
 {
@@ -19,6 +23,10 @@ namespace KnowledgeZone.Api.Controllers
         public ActionResult<IEnumerable<CourseDto>> GetCourese([FromQuery] CourseResourceParamentrs courseResourceParamentrs)
         {
             var courses = _courseService.GetCourse(courseResourceParamentrs);
+
+            var metaData = GetPagenationMetaData(courses);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
 
             return Ok(courses);
         }
@@ -53,6 +61,23 @@ namespace KnowledgeZone.Api.Controllers
             _courseService.DeleteCourse(id);
 
             return NoContent();
+        }
+        private PagenationMetaData GetPagenationMetaData(PaginatedList<CourseDto> courseDtOs)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = courseDtOs.TotalCount,
+                PageSize = courseDtOs.PageSize,
+                CurrentPage = courseDtOs.CurrentPage,
+                TotalPages = courseDtOs.TotalPage,
+            };
+        }
+        class PagenationMetaData
+        {
+            public int Totalcount { get; set; }
+            public int PageSize { get; set; }
+            public int CurrentPage { get; set; }
+            public int TotalPages { get; set; }
         }
     }
 }
