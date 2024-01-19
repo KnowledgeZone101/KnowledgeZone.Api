@@ -43,13 +43,13 @@ namespace KnowledgeZone.Service
                     case "teacherId_desc":
                         query = query.OrderByDescending(c => c.TeacherId); break;
                     case "departmentId":
-                        query = query.OrderBy(c => c.Department); break;
+                        query = query.OrderBy(c => c.DepartmentId); break;
                     case "department_desc":
-                        query = query.OrderByDescending(c => c.Department); break;
+                        query = query.OrderByDescending(c => c.DepartmentId); break;
                     case "enrollmentId":
-                        query = query.OrderBy(c => c.Enrollment); break;
+                        query = query.OrderBy(c => c.EnrollmentId); break;
                     case "enrollment_desc":
-                        query = query.OrderByDescending(c => c.Enrollment); break;
+                        query = query.OrderByDescending(c => c.EnrollmentId); break;
                     case "courseTypeId":
                         query = query.OrderBy(c => c.CourseTypeId); break;
                     case "courseTypeId_desc":

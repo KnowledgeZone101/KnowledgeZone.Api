@@ -36,9 +36,9 @@ namespace KnowledgeZone.Service
                     case "email_desc":
                         query = query.OrderByDescending(t => t.Email); break;
                         case "qualification":
-                        query = query.OrderBy(t => t.Qualification); break;
+                        query = query.OrderBy(t => t.QualificationId); break;
                     case "qualification_desc":
-                        query = query.OrderByDescending(t => t.Qualification); break;
+                        query = query.OrderByDescending(t => t.QualificationId); break;
                 }
             }
 
