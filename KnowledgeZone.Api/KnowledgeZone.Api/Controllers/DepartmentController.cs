@@ -1,7 +1,11 @@
-﻿using KnowledgeZone.Domain.DTOs.Department;
+﻿using KnowledgeZone.Domain.DTOs.Attendance;
+using KnowledgeZone.Domain.DTOs.Department;
+using KnowledgeZone.Domain.Entities;
 using KnowledgeZone.Domain.Interfaces.IServices;
+using KnowledgeZone.Domain.Pagination;
 using KnowledgeZone.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace KnowledgeZone.Api.Controllers
 {
@@ -19,6 +23,10 @@ namespace KnowledgeZone.Api.Controllers
         public ActionResult<IEnumerable<DepartmentDto>> GetDepartments([FromQuery] DepartmentResourceParamentrs departmentResourceParamentrs)
         {
             var departments = _departmentService.GetDepartment(departmentResourceParamentrs);
+
+            var metaData = GetPagenationMetaData(departments);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
 
             return Ok(departments);
         }
@@ -53,6 +61,23 @@ namespace KnowledgeZone.Api.Controllers
             _departmentService.DeleteDepartment(id);
 
             return NoContent();
+        }
+        private PagenationMetaData GetPagenationMetaData(PaginatedList<DepartmentDto> departmentDtOs)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = departmentDtOs.TotalCount,
+                PageSize = departmentDtOs.PageSize,
+                CurrentPage = departmentDtOs.CurrentPage,
+                TotalPages = departmentDtOs.TotalPage,
+            };
+        }
+        class PagenationMetaData
+        {
+            public int Totalcount { get; set; }
+            public int PageSize { get; set; }
+            public int CurrentPage { get; set; }
+            public int TotalPages { get; set; }
         }
     }
 }

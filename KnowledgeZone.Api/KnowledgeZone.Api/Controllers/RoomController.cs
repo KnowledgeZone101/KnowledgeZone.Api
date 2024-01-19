@@ -1,7 +1,11 @@
-﻿using KnowledgeZone.Domain.DTOs.Room;
+﻿using KnowledgeZone.Domain.DTOs.Attendance;
+using KnowledgeZone.Domain.DTOs.Room;
+using KnowledgeZone.Domain.Entities;
 using KnowledgeZone.Domain.Interfaces.IServices;
+using KnowledgeZone.Domain.Pagination;
 using KnowledgeZone.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace KnowledgeZone.Api.Controllers
 {
@@ -19,6 +23,10 @@ namespace KnowledgeZone.Api.Controllers
         public ActionResult<IEnumerable<RoomDto>> GetRoom([FromQuery] RoomResourceParamentrs roomResourceParamentrs)
         {
             var room = _roomService.GetRoom(roomResourceParamentrs);
+
+            var metaData = GetPagenationMetaData(room);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
 
             return Ok(room);
         }
@@ -53,6 +61,23 @@ namespace KnowledgeZone.Api.Controllers
             _roomService.DeleteRoom(id);
 
             return Ok();
+        }
+        private PagenationMetaData GetPagenationMetaData(PaginatedList<RoomDto> roomDtOs)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = roomDtOs.TotalCount,
+                PageSize = roomDtOs.PageSize,
+                CurrentPage = roomDtOs.CurrentPage,
+                TotalPages = roomDtOs.TotalPage,
+            };
+        }
+        class PagenationMetaData
+        {
+            public int Totalcount { get; set; }
+            public int PageSize { get; set; }
+            public int CurrentPage { get; set; }
+            public int TotalPages { get; set; }
         }
     }
 }

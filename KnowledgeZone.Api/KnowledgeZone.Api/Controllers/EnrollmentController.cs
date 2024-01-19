@@ -1,7 +1,11 @@
-﻿using KnowledgeZone.Domain.DTOs.Enrollment;
+﻿using KnowledgeZone.Domain.DTOs.Attendance;
+using KnowledgeZone.Domain.DTOs.Enrollment;
+using KnowledgeZone.Domain.Entities;
 using KnowledgeZone.Domain.Interfaces.IServices;
+using KnowledgeZone.Domain.Pagination;
 using KnowledgeZone.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace KnowledgeZone.Api.Controllers
 {
@@ -19,6 +23,10 @@ namespace KnowledgeZone.Api.Controllers
         public ActionResult<IEnumerable<EnrollmentDto>> GetEnrollments([FromQuery] EnrollmentResourceParamentrs enrollmentResourceParamentrs)
         {
             var enrollments = _enrollmentService.GetEnrollment(enrollmentResourceParamentrs);
+
+            var metaData = GetPagenationMetaData(enrollments);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
 
             return Ok(enrollments);
         }
@@ -53,6 +61,23 @@ namespace KnowledgeZone.Api.Controllers
             _enrollmentService.DeleteEnrollment(id);
 
             return Ok();
+        }
+        private PagenationMetaData GetPagenationMetaData(PaginatedList<EnrollmentDto> enrollmentDtOs)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = enrollmentDtOs.TotalCount,
+                PageSize = enrollmentDtOs.PageSize,
+                CurrentPage = enrollmentDtOs.CurrentPage,
+                TotalPages = enrollmentDtOs.TotalPage,
+            };
+        }
+        class PagenationMetaData
+        {
+            public int Totalcount { get; set; }
+            public int PageSize { get; set; }
+            public int CurrentPage { get; set; }
+            public int TotalPages { get; set; }
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using KnowledgeZone.Domain.DTOs.Attendance;
 using KnowledgeZone.Domain.Interfaces.IServices;
+using KnowledgeZone.Domain.Pagination;
 using KnowledgeZone.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace KnowledgeZone.Api.Controllers
 {
@@ -19,6 +21,10 @@ namespace KnowledgeZone.Api.Controllers
         public ActionResult<IEnumerable<AttendanceDto>> GetAttendance([FromQuery] AttendanceResourceParameters attendanceResourceParameters)
         {
             var attendance = _attendanceService.GetAttendance(attendanceResourceParameters);
+
+            var metaData = GetPagenationMetaData(attendance);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
 
             return Ok(attendance);
         }
@@ -53,6 +59,23 @@ namespace KnowledgeZone.Api.Controllers
             _attendanceService.DeleteAttendance(id);
 
             return NoContent();
+        }
+        private PagenationMetaData GetPagenationMetaData(PaginatedList<AttendanceDto> attendanceDtOs)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = attendanceDtOs.TotalCount,
+                PageSize = attendanceDtOs.PageSize,
+                CurrentPage = attendanceDtOs.CurrentPage,
+                TotalPages = attendanceDtOs.TotalPage,
+            };
+        }
+        class PagenationMetaData
+        {
+            public int Totalcount { get; set; }
+            public int PageSize { get; set; }
+            public int CurrentPage { get; set; }
+            public int TotalPages { get; set; }
         }
     }
 }
