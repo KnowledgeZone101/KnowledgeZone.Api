@@ -19,9 +19,9 @@ namespace KnowledgeZone.Infrastructure.Persistence.Configuration
                 .WithMany(r => r.Lessons)
                 .HasForeignKey(l => l.CourseId);
 
-            //builder.HasOne(l => l.Attendance)
-            //    .WithOne(r => r.Lessons)
-            //    .HasForeignKey<Lesson>(l => l.AttendanceId);
+            builder.HasMany(a => a.Attendances)
+                .WithOne(l => l.Lesson)
+                .HasForeignKey(l => l.LessonId);
         }
     }
 }

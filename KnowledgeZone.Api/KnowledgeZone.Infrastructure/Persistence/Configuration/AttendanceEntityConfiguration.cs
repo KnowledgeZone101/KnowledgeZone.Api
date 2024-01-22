@@ -15,8 +15,8 @@ namespace KnowledgeZone.Infrastructure.Persistence.Configuration
                 .IsRequired();
 
             builder.HasOne(a => a.Lesson)
-                .WithOne(l => l.Attendance)
-                .HasForeignKey<Attendance>(a => a.LessonId);
+                .WithMany(l => l.Attendances)
+                .HasForeignKey(a => a.LessonId);
 
             builder.Property(a => a.AttendanceType)
                 .IsRequired();
