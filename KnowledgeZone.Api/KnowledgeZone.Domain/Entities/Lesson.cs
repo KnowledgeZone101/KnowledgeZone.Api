@@ -10,7 +10,7 @@ namespace KnowledgeZone.Domain.Entities
         public Room? Room { get; set; }
         public int CourseId { get; set; }
         public Course? Course { get; set; }
-        public int AttendanceId { get; set; }
-        public Attendance? Attendance { get; set; }
+        public virtual ICollection<Attendance>? Attendances { get; set; }
+
     }
 }

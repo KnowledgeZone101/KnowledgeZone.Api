@@ -49,10 +49,10 @@ namespace KnowledgeZone.Service
                         query = query.OrderBy(l => l.CourseId); break;
                     case "courseId_desc":
                         query = query.OrderByDescending(l => l.CourseId); break;
-                    case "attendanceId":
-                        query = query.OrderBy(l => l.AttendanceId); break;
-                    case "attendanceId_desc":
-                        query = query.OrderByDescending(l => l.AttendanceId); break;
+                    //case "attendanceId":
+                    //    query = query.OrderBy(l => l.AttendanceId); break;
+                    //case "attendanceId_desc":
+                    //    query = query.OrderByDescending(l => l.AttendanceId); break;
                 }
             }
 
