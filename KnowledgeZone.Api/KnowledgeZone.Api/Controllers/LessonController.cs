@@ -62,22 +62,15 @@ namespace KnowledgeZone.Api.Controllers
 
             return NoContent();
         }
-        private PagenationMetaData GetPagenationMetaData(PaginatedList<LessonDto> lessonDtOs)
+        private PaginationMetaData GetPagenationMetaData(PaginatedList<LessonDto> lessonDtOs)
         {
-            return new PagenationMetaData
+            return new PaginationMetaData
             {
                 Totalcount = lessonDtOs.TotalCount,
                 PageSize = lessonDtOs.PageSize,
                 CurrentPage = lessonDtOs.CurrentPage,
                 TotalPages = lessonDtOs.TotalPage,
             };
-        }
-        class PagenationMetaData
-        {
-            public int Totalcount { get; set; }
-            public int PageSize { get; set; }
-            public int CurrentPage { get; set; }
-            public int TotalPages { get; set; }
         }
     }
 }
