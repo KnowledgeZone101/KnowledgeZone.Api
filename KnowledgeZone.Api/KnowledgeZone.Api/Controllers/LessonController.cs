@@ -4,6 +4,7 @@ using KnowledgeZone.Domain.Entities;
 using KnowledgeZone.Domain.Interfaces.IServices;
 using KnowledgeZone.Domain.Pagination;
 using KnowledgeZone.Domain.ResourceParameters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -11,6 +12,7 @@ namespace KnowledgeZone.Api.Controllers
 {
     [Route("api/lesson")]
     [ApiController]
+    [Authorize]
     public class LessonController : Controller
     {
         private readonly ILessonService _lessonService;
@@ -26,7 +28,7 @@ namespace KnowledgeZone.Api.Controllers
 
             var metaData = GetPagenationMetaData(lesson);
 
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
+            Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metaData));
 
             return Ok(lesson);
         }

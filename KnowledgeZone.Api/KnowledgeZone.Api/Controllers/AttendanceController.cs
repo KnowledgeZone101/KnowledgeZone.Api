@@ -24,7 +24,7 @@ namespace KnowledgeZone.Api.Controllers
 
             var metaData = GetPagenationMetaData(attendance);
 
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
+            Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metaData));
 
             return Ok(attendance);
         }

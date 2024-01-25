@@ -1,8 +1,6 @@
-﻿using KnowledgeZone.Domain.Entities;
-using KnowledgeZone.Domain.Interfaces.IServices;
+﻿using KnowledgeZone.Domain.Interfaces.IServices;
 using KnowledgeZone.Domain.Interfaces.Repository;
 using KnowledgeZone.Infrastructure;
-using KnowledgeZone.Infrastructure.Persistence.Interceptors;
 using KnowledgeZone.Infrastructure.Persistence.Repositories;
 using KnowledgeZone.Service;
 using Microsoft.EntityFrameworkCore;
