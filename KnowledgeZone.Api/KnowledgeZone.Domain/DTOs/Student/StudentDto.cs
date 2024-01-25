@@ -6,6 +6,7 @@ namespace KnowledgeZone.Domain.DTOs.Student
         int StudentId,
         string Name,
         string Email,
-        int EnrollmentId,
-        EnrollmentDto Enrollment);
+        int EnrollmentId
+        //EnrollmentDto Enrollment
+    );
 }
