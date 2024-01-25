@@ -26,7 +26,7 @@ namespace KnowledgeZone.Api.Controllers
 
             var metaData = GetPagenationMetaData(qualification);
 
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
+            Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metaData));
 
             return Ok(qualification);
         }
@@ -62,22 +62,15 @@ namespace KnowledgeZone.Api.Controllers
 
             return NoContent();
         }
-        private PagenationMetaData GetPagenationMetaData(PaginatedList<QualificationDto> qualificationDtOs)
+        private PaginationMetaData GetPagenationMetaData(PaginatedList<QualificationDto> qualificationDtOs)
         {
-            return new PagenationMetaData
+            return new PaginationMetaData
             {
                 Totalcount = qualificationDtOs.TotalCount,
                 PageSize = qualificationDtOs.PageSize,
                 CurrentPage =  qualificationDtOs.CurrentPage,
                 TotalPages = qualificationDtOs.TotalPage,
             };
-        }
-        class PagenationMetaData
-        {
-            public int Totalcount { get; set; }
-            public int PageSize { get; set; }
-            public int CurrentPage { get; set; }
-            public int TotalPages { get; set; }
         }
     }
 }
