@@ -2,5 +2,5 @@
 
 namespace KnowledgeZone.Domain.DTOs.CourseType
 {
-    public record CourseTypeDto(int CourseTypeId, string Name, ICollection<CourseDto> Courses);
+    public record CourseTypeDto(int Id, string Name, ICollection<CourseDto> Courses);
 }

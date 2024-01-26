@@ -1,5 +1,4 @@
 ﻿using KnowledgeZone.Domain.Exceptions;
-using KnowledgeZone.Infrastructure.Migrations;
 using System.Net;
 
 namespace KnowledgeZone.Api.Middlewares
