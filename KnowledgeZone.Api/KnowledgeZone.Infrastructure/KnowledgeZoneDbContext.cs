@@ -21,9 +21,14 @@ namespace KnowledgeZone.Infrastructure
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
 
-        public KnowledgeZoneDbContext(DbContextOptions<KnowledgeZoneDbContext> options) : base(options)
+        //public KnowledgeZoneDbContext(DbContextOptions<KnowledgeZoneDbContext> options, Persistence.Interceptors.LongQueryIntercepters longQueryInterceptor) : base(options)
+        //{
+        //    Database.Migrate();
+        //}
+        public KnowledgeZoneDbContext(DbContextOptions<KnowledgeZoneDbContext> options)
+   : base(options)
         {
-            //Database.Migrate();
+            Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

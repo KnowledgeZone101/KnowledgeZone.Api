@@ -4,16 +4,19 @@ using KnowledgeZone.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace KnowledgeZone.Infrastructure.Migrations
+namespace KnowledgeZone.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(KnowledgeZoneDbContext))]
-    partial class KnowledgeZoneDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240122101856_Initial_Create")]
+    partial class Initial_Create
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,8 +47,7 @@ namespace KnowledgeZone.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LessonId")
-                        .IsUnique();
+                    b.HasIndex("LessonId");
 
                     b.ToTable("Attendance", (string)null);
                 });
@@ -149,9 +151,6 @@ namespace KnowledgeZone.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AttendanceId")
-                        .HasColumnType("int");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
@@ -269,8 +268,8 @@ namespace KnowledgeZone.Infrastructure.Migrations
             modelBuilder.Entity("KnowledgeZone.Domain.Entities.Attendance", b =>
                 {
                     b.HasOne("KnowledgeZone.Domain.Entities.Lesson", "Lesson")
-                        .WithOne("Attendance")
-                        .HasForeignKey("KnowledgeZone.Domain.Entities.Attendance", "LessonId")
+                        .WithMany("Attendances")
+                        .HasForeignKey("LessonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -377,7 +376,7 @@ namespace KnowledgeZone.Infrastructure.Migrations
 
             modelBuilder.Entity("KnowledgeZone.Domain.Entities.Lesson", b =>
                 {
-                    b.Navigation("Attendance");
+                    b.Navigation("Attendances");
                 });
 
             modelBuilder.Entity("KnowledgeZone.Domain.Entities.Qualification", b =>
