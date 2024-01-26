@@ -4,6 +4,7 @@ using KnowledgeZone.Domain.Entities;
 using KnowledgeZone.Domain.Interfaces.IServices;
 using KnowledgeZone.Domain.Pagination;
 using KnowledgeZone.Domain.ResourceParameters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -11,6 +12,7 @@ namespace KnowledgeZone.Api.Controllers
 {
     [Route("api/courseType")]
     [ApiController]
+    [Authorize]
     public class CourseTypeController : Controller
     {
         private readonly ICourseTypeService _courseTypeService;
@@ -63,22 +65,15 @@ namespace KnowledgeZone.Api.Controllers
             return NoContent();
         }
 
-        private PagenationMetaData GetPagenationMetaData(PaginatedList<CourseTypeDto> courseTypeDtOs)
+        private PaginationMetaData GetPagenationMetaData(PaginatedList<CourseTypeDto> courseTypeDtOs)
         {
-            return new PagenationMetaData
+            return new PaginationMetaData
             {
                 Totalcount = courseTypeDtOs.TotalCount,
                 PageSize = courseTypeDtOs.PageSize,
                 CurrentPage = courseTypeDtOs.CurrentPage,
                 TotalPages = courseTypeDtOs.TotalPage,
             };
-        }
-        class PagenationMetaData
-        {
-            public int Totalcount { get; set; }
-            public int PageSize { get; set; }
-            public int CurrentPage { get; set; }
-            public int TotalPages { get; set; }
         }
     }
 }

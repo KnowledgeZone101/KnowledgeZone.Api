@@ -43,7 +43,7 @@ namespace KnowledgeZone.Service
             }
 
             var attendances = query.ToPaginatedList(attendanceResourceParameters.PageSize, attendanceResourceParameters.PageNumber);
-            var attendancesDto = _mapper.Map<PaginatedList<AttendanceDto>>(attendances);
+            var attendancesDto = _mapper.Map<List<AttendanceDto>>(attendances);
 
             return new PaginatedList<AttendanceDto>(attendancesDto, attendances.TotalCount,attendances.CurrentPage,attendances.PageSize);
         }

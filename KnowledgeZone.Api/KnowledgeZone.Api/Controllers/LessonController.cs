@@ -4,6 +4,7 @@ using KnowledgeZone.Domain.Entities;
 using KnowledgeZone.Domain.Interfaces.IServices;
 using KnowledgeZone.Domain.Pagination;
 using KnowledgeZone.Domain.ResourceParameters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -11,6 +12,7 @@ namespace KnowledgeZone.Api.Controllers
 {
     [Route("api/lesson")]
     [ApiController]
+    [Authorize]
     public class LessonController : Controller
     {
         private readonly ILessonService _lessonService;
@@ -26,7 +28,7 @@ namespace KnowledgeZone.Api.Controllers
 
             var metaData = GetPagenationMetaData(lesson);
 
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
+            Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metaData));
 
             return Ok(lesson);
         }
@@ -62,22 +64,15 @@ namespace KnowledgeZone.Api.Controllers
 
             return NoContent();
         }
-        private PagenationMetaData GetPagenationMetaData(PaginatedList<LessonDto> lessonDtOs)
+        private PaginationMetaData GetPagenationMetaData(PaginatedList<LessonDto> lessonDtOs)
         {
-            return new PagenationMetaData
+            return new PaginationMetaData
             {
                 Totalcount = lessonDtOs.TotalCount,
                 PageSize = lessonDtOs.PageSize,
                 CurrentPage = lessonDtOs.CurrentPage,
                 TotalPages = lessonDtOs.TotalPage,
             };
-        }
-        class PagenationMetaData
-        {
-            public int Totalcount { get; set; }
-            public int PageSize { get; set; }
-            public int CurrentPage { get; set; }
-            public int TotalPages { get; set; }
         }
     }
 }

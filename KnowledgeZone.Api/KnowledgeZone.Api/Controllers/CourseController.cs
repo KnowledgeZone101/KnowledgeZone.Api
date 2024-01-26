@@ -1,9 +1,8 @@
-﻿using KnowledgeZone.Domain.DTOs.Attendance;
-using KnowledgeZone.Domain.DTOs.Course;
-using KnowledgeZone.Domain.Entities;
+﻿using KnowledgeZone.Domain.DTOs.Course;
 using KnowledgeZone.Domain.Interfaces.IServices;
 using KnowledgeZone.Domain.Pagination;
 using KnowledgeZone.Domain.ResourceParameters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -11,9 +10,10 @@ namespace KnowledgeZone.Api.Controllers
 {
     [Route("api/course")]
     [ApiController]
+    [Authorize]
     public class CourseController : Controller
     {
-        private readonly ICourseService _courseService; 
+        private readonly ICourseService _courseService;
         public CourseController(ICourseService courseService)
         {
             _courseService = courseService;
@@ -26,7 +26,7 @@ namespace KnowledgeZone.Api.Controllers
 
             var metaData = GetPagenationMetaData(courses);
 
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
+            Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metaData));
 
             return Ok(courses);
         }
@@ -62,22 +62,15 @@ namespace KnowledgeZone.Api.Controllers
 
             return NoContent();
         }
-        private PagenationMetaData GetPagenationMetaData(PaginatedList<CourseDto> courseDtOs)
+        private PaginationMetaData GetPagenationMetaData(PaginatedList<CourseDto> courseDtOs)
         {
-            return new PagenationMetaData
+            return new PaginationMetaData
             {
                 Totalcount = courseDtOs.TotalCount,
                 PageSize = courseDtOs.PageSize,
                 CurrentPage = courseDtOs.CurrentPage,
                 TotalPages = courseDtOs.TotalPage,
             };
-        }
-        class PagenationMetaData
-        {
-            public int Totalcount { get; set; }
-            public int PageSize { get; set; }
-            public int CurrentPage { get; set; }
-            public int TotalPages { get; set; }
         }
     }
 }

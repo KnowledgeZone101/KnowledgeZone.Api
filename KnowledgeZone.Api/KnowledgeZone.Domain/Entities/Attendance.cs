@@ -9,7 +9,7 @@ namespace KnowledgeZone.Domain.Entities
         public Mark? Mark { get; set; }
         public int LessonId { get; set; }
         public Lesson Lesson { get; set; }
-        //public virtual ICollection<Lesson> Lessons { get; set; }
+ 
     }
 
     public enum Mark
