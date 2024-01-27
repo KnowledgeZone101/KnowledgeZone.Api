@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace KnowledgeZone.Infrastructure.Persistence.Migrations
+namespace KnowledgeZone.Infrastructure.persistence.Migrations
 {
     [DbContext(typeof(KnowledgeZoneDbContext))]
-    [Migration("20240122101856_Initial_Create")]
-    partial class Initial_Create
+    [Migration("20240127044218_initial_create")]
+    partial class initial_create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,8 @@ namespace KnowledgeZone.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LessonId");
+                    b.HasIndex("LessonId")
+                        .IsUnique();
 
                     b.ToTable("Attendance", (string)null);
                 });
@@ -151,6 +152,9 @@ namespace KnowledgeZone.Infrastructure.Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AttendanceId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
@@ -268,8 +272,8 @@ namespace KnowledgeZone.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("KnowledgeZone.Domain.Entities.Attendance", b =>
                 {
                     b.HasOne("KnowledgeZone.Domain.Entities.Lesson", "Lesson")
-                        .WithMany("Attendances")
-                        .HasForeignKey("LessonId")
+                        .WithOne("Attendance")
+                        .HasForeignKey("KnowledgeZone.Domain.Entities.Attendance", "LessonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -376,7 +380,7 @@ namespace KnowledgeZone.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("KnowledgeZone.Domain.Entities.Lesson", b =>
                 {
-                    b.Navigation("Attendances");
+                    b.Navigation("Attendance");
                 });
 
             modelBuilder.Entity("KnowledgeZone.Domain.Entities.Qualification", b =>
